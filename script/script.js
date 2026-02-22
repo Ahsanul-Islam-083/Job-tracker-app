@@ -3,6 +3,8 @@ let jobRejected = [];
 let currentStatus = "all";
 
 let total = document.getElementById("total");
+let total1 = document.getElementById("total1");
+let total2 = document.getElementById("total2");
 let availableJobs = document.getElementById("remainingJobs");
 let filteredAvailableJobsInterview = document.getElementById(
   "filteredRemainingJobs",
@@ -28,6 +30,8 @@ const filteredJobs = document.getElementById("filteredJobs");
 
 function calculateCount() {
   total.innerText = allJobCards.children.length;
+  total1.innerText = allJobCards.children.length;
+  total2.innerText = allJobCards.children.length;
   availableJobs.innerText = allJobCards.children.length;
   interviewCount.innerText = jobInterviews.length;
   filteredAvailableJobsInterview.innerText = jobInterviews.length;
@@ -37,13 +41,13 @@ function calculateCount() {
 
 calculateCount();
 
-allJobCards.addEventListener("click", function (event) {
-  if (event.target.classList.contains("dltBtn")) {
-    const card = event.target.closest(".card");
-    card.remove();
-    calculateCount();
-  }
-});
+// main.addEventListener("click", function (event) {
+//   if (event.target.classList.contains("dltBtn")) {
+//     const card = event.target.closest(".card");
+//     card.remove();
+//     calculateCount();
+//   }
+// });
 
 function toggleFilterBtn(id) {
   filterAllBtn.classList.remove("btn-primary");
@@ -59,6 +63,10 @@ function toggleFilterBtn(id) {
 
   selectedBtn.classList.remove("text-gray-500");
   selectedBtn.classList.add("btn-primary");
+
+  ofAll.classList.add("hidden");
+  ofInterview.classList.add("hidden");
+  ofReject.classList.add("hidden");
 
   if (id == "filterInterview") {
     allJobCards.classList.add("hidden");
@@ -85,6 +93,71 @@ function toggleFilterBtn(id) {
 }
 
 main.addEventListener("click", function (event) {
+  if (event.target.classList.contains("dltBtn")) {
+    const card = event.target.closest(".card");
+    const companyName = card.querySelector(".companyName").innerText;
+
+    card.remove();
+
+    jobInterviews = jobInterviews.filter(
+      (item) => item.companyName !== companyName,
+    );
+
+    jobRejected = jobRejected.filter(
+      (item) => item.companyName !== companyName,
+    );
+
+    const allCards = allJobCards.querySelectorAll(".card");
+
+    allCards.forEach((item) => {
+      const name = item.querySelector(".companyName").innerText;
+      if (name === companyName) {
+        item.remove();
+      }
+    });
+
+    if (currentStatus === "filterInterview") {
+      renderFilteredCards(jobInterviews);
+    } else if (currentStatus === "filterRejected") {
+      renderFilteredCards(jobRejected);
+    }
+
+    handleNoJobCard();
+    calculateCount();
+  }
+
+  //   if (event.target.classList.contains("dltBtn")) {
+  //     const card = event.target.closest(".card");
+  //     card.remove();
+  //     calculateCount();
+  //     console.log(card);
+  //     const companyName = card.querySelector(".companyName").innerText;
+  //     console.log(companyName);
+  //     const cardNameObject = { companyName };
+  //     console.log(cardNameObject);
+
+  //     jobRejected = jobRejected.filter(
+  //       (item) => item.companyName != cardNameObject.companyName,
+  //     );
+
+  //     if (currentStatus == "filterRejected") {
+  //       renderFilteredCards(jobRejected);
+  //       handleNoJobCard();
+  //     }
+  //     card.remove();
+  //     calculateCount();
+  //     jobInterviews = jobInterviews.filter(
+  //       (item) => item.companyName != cardNameObject.companyName,
+  //     );
+
+  //     if (currentStatus == "filterInterview") {
+  //       renderFilteredCards(jobInterviews);
+  //       handleNoJobCard();
+  //     }
+  //     card.remove();
+  //     calculateCount();
+  //   }
+
   if (event.target.classList.contains("interviewBtn")) {
     const card = event.target.closest(".card");
     const companyName = card.querySelector(".companyName").innerText;
@@ -123,7 +196,7 @@ main.addEventListener("click", function (event) {
 
     if (currentStatus == "filterRejected") {
       renderFilteredCards(jobRejected);
-      handleNoJobCard()
+      handleNoJobCard();
     }
 
     calculateCount();
@@ -165,7 +238,7 @@ main.addEventListener("click", function (event) {
 
     if (currentStatus == "filterInterview") {
       renderFilteredCards(jobInterviews);
-      handleNoJobCard()
+      handleNoJobCard();
     }
 
     calculateCount();
