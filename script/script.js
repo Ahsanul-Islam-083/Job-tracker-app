@@ -41,13 +41,6 @@ function calculateCount() {
 
 calculateCount();
 
-// main.addEventListener("click", function (event) {
-//   if (event.target.classList.contains("dltBtn")) {
-//     const card = event.target.closest(".card");
-//     card.remove();
-//     calculateCount();
-//   }
-// });
 
 function toggleFilterBtn(id) {
   filterAllBtn.classList.remove("btn-primary");
@@ -126,37 +119,6 @@ main.addEventListener("click", function (event) {
     calculateCount();
   }
 
-  //   if (event.target.classList.contains("dltBtn")) {
-  //     const card = event.target.closest(".card");
-  //     card.remove();
-  //     calculateCount();
-  //     console.log(card);
-  //     const companyName = card.querySelector(".companyName").innerText;
-  //     console.log(companyName);
-  //     const cardNameObject = { companyName };
-  //     console.log(cardNameObject);
-
-  //     jobRejected = jobRejected.filter(
-  //       (item) => item.companyName != cardNameObject.companyName,
-  //     );
-
-  //     if (currentStatus == "filterRejected") {
-  //       renderFilteredCards(jobRejected);
-  //       handleNoJobCard();
-  //     }
-  //     card.remove();
-  //     calculateCount();
-  //     jobInterviews = jobInterviews.filter(
-  //       (item) => item.companyName != cardNameObject.companyName,
-  //     );
-
-  //     if (currentStatus == "filterInterview") {
-  //       renderFilteredCards(jobInterviews);
-  //       handleNoJobCard();
-  //     }
-  //     card.remove();
-  //     calculateCount();
-  //   }
 
   if (event.target.classList.contains("interviewBtn")) {
     const card = event.target.closest(".card");
