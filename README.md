@@ -7,8 +7,11 @@
 
 ### 2. How do you create and insert a new element into the DOM?
 -First: get the Parent Element -> document.getElementById("parent")
+
 -Second: Create the ELement -> document.createElement("element")
+
 -Third: Writing content inside the newly created Element -> element.innerHtml/Text = `content`
+
 -Fourth: append that Element as a child Into the Parent ->parent.append(element) 
 
 
